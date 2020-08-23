@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Project.Models.Tree>
+
+@{
+    ViewData["Title"] = "Список деревьев";
+}
+
+<h2>Список деревьев</h2>
+
+<p>
+    <a asp-action="AddTree">Создать новое дерево</a>
+</p>
+<br />
+<script>
+    function toggleType(type) {
+        var rows = document.getElementsByClassName("rows");
+        for (var i = 0; i < rows.length; i++) {
+            if (type == 0) {
+                if (!rows[i].innerHTML.includes("Производство")) {
+                    rows[i].style.visibility = "hidden";
+                } else {
+                    rows[i].style.visibility = "visible";
+                }
+            }
+            else if (type == 1) {
+                if (!rows[i].innerHTML.includes("Проектный блок")) {
+                    rows[i].style.visibility = "hidden";
+                } else {
+                    rows[i].style.visibility = "visible";
+                }
+            } 
+            else if (type == 2) {
+                if (!rows[i].innerHTML.includes("Коммуникации")) {
+                    rows[i].style.visibility = "hidden";
+                } else {
+                    rows[i].style.visibility = "visible";
+                }
+            } else {
+                rows[i].style.visibility = "visible";
+            }
+        }
+
+    }
+</script>
+
+<div>
+    <input type="button" onclick="toggleType(-1)" value="Показать все" />
+    <input type="button" onclick="toggleType(0)" value="Производство" />
+    <input type="button" onclick="toggleType(1)" value="Проектный блок" />
+    <input type="button" onclick="toggleType(2)" value="Коммуникации" />
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Тип</th>
+            <th>Владелец</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="rows">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TreeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
+            <td>
+                <a asp-action="TreeEdit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

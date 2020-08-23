@@ -1,0 +1,134 @@
+﻿@model Project.Models.Technology
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+@{
+    ViewData["Title"] = "Редактирование технологии";
+}
+<form asp-action="TechnologyEdit" asp-controller="Technologies" asp-anti-forgery="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h2 class="page-header">
+                    <strong>@Model.Name</strong>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <h3><strong> Характеристики</strong></h3>
+                        <div class="text-center" id="author">
+                            <p>
+                                <table class="table table-striped" style="width: 100%; table-layout: fixed;">
+                                    <tbody>
+                                        @using Project.App_Code
+                                        @Html.CreateListCharacteristics(Model.SId)
+                                        <tr>
+                                            <td class="active">
+                                                @Html.DropDownList("charId", ViewBag.Char as SelectList,
+                                                    htmlAttributes: new { @class = "form-control" })
+
+                                                Добавить новое: <input type="text" name="charName" />
+                                            </td>
+                                            <td  class="active" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis; width: inherit;">
+                                                <input type="text" name="charD" style="width: 100%"/>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <table class="table table-striped" style="width: 100%; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th>Тесты</th>
+                            <th>Уровень</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @Html.CreateListTests(Model.SId)
+                        <tr>
+                            <td class="active" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis; width: inherit;">
+                                <input type="text" name="test" style="width: 100%" />
+                            </td>
+                            <td>
+                                @Html.DropDownList("levelTest", ViewBag.Level as SelectList,
+                                   htmlAttributes: new { @class = "form-control" })
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2">
+                <table class="table table-striped" style="width: 100%; table-layout: fixed">
+                    <thead>
+                        <tr>
+                            <th>Данные</th>
+                            <th>Уровень</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.CreateListData(Model.SId)
+                        <tr>
+                            <td class="active" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                                <input type="text" name="data" style="width: 100%"/>
+                            </td>
+                            <td>
+                                @Html.DropDownList("levelData", ViewBag.Level as SelectList,
+                                   htmlAttributes: new { @class = "form-control" })
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-4">
+                <table class="table table-striped" style="width: 100%; table-layout: fixed; ">
+                    <thead>
+                        <tr>
+                            <th>Кураторы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.CreateListCurators(Model.SId)
+                        <tr>
+                            <td>
+                                @if (Html.Admin(User.Identity.Name) == "admin")
+                                {
+                                    @Html.DropDownList("users", ViewBag.Users as SelectList,
+                                  htmlAttributes: new { @class = "form-control"} )
+                                }
+                                @if (Html.Admin(User.Identity.Name) != "admin")
+                                {
+                                    @Html.DropDownList("users", ViewBag.Users as SelectList,
+                                  htmlAttributes: new { @class = "form-control", @style = "display:none" } )
+                                }
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="SId" value=@Model.SId>
+            <input type="submit" value="Сохранить" class="btn" />
+            <input type="submit" value="Отмена" class="btn" />
+        </div>
+    </div>
+        
+</form>
+

@@ -1,0 +1,57 @@
+﻿@model Project.Models.GradeName
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+@{
+    ViewData["Title"] = "Изменение должности";
+}
+
+<form asp-action="GradeEdit" asp-controller="Grade" asp-anti-forgery="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h2 class="page-header">
+                    <strong>@Model.Name</strong>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin: 10px 10px 10px 10px">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <h3><strong> Технологии</strong></h3>
+                        <div class="text-center" id="author">
+                            <p>
+                                <table class="table table-striped"  style="width:100%; table-layout:fixed">
+                                    <tbody>
+                                        @using Project.App_Code
+                                        @Html.CreateListTechnologies(Model.Id)
+                                        <tr>
+                                            <td class="active">
+                                                @Html.DropDownList("techId", ViewBag.Tech as SelectList,
+                                                    htmlAttributes: new { @class = "form-control" })
+
+                                                Добавить новое: <input type="text" name="tech" />
+                                            </td>
+                                            <td>
+                                                @Html.DropDownList("level", ViewBag.Level as SelectList,
+                                                   htmlAttributes: new { @class = "form-control" })
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="Id" value=@Model.Id>
+            <input type="submit" value="Сохранить" class="btn" />
+            <input type="submit" value="Отмена" class="btn" />
+        </div>
+    </div>
+</form>

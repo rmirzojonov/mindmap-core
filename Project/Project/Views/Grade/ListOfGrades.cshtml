@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Project.Models.GradeName>
+
+@{
+    ViewData["Title"] = "Список должностей";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<h2 class="page-header">
+    @using Project.App_Code
+    @if (Html.Admin(User.Identity.Name) == "admin")
+    {
+        <strong>Должности</strong>@Html.ActionLink("+", "AddGrade", "Grade", Model)
+    }
+    @if (Html.Admin(User.Identity.Name) != "admin")
+    {
+        <strong>Должности</strong>
+    }
+
+</h2>
+
+<table class="table table-hover" style="width:100%; table-layout: fixed;">
+    <thead>
+        <tr>
+            <th style="width:10%">#</th>
+            <th>Название</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">@Html.ActionLink(@item.Name, "Grade", "Grade", item)</td>
+            </tr>
+
+        }
+    </tbody>
+</table>

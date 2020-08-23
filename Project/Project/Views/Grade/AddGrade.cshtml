@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Project.Models.GradeName>
+
+@{
+    ViewData["Title"] = "Добавить должность";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<h2>Реестр должностей</h2>
+<form asp-action="AddGrade" asp-controller="Grade" asp-anti-forgery="true">
+    <table class="table table-hover"  style="width:100%; table-layout: fixed;">
+        <thead>
+            <tr>
+                <th style="width:10%">#</th>
+                <th>Название</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">@Html.ActionLink(@item.Name, "Grade", "Grade", item)</td>
+                </tr>
+
+
+            }
+            <tr>
+                <th scope="row">@(Model.Count()+1)</th>
+                <td><input type="text" name="grade" style="width:100%"/></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn" />
+        <input type="submit" value="Отмена" class="btn" />
+    </div>
+</form>

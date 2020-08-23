@@ -1,0 +1,36 @@
+﻿@model Project.Models.Tree
+
+@{
+    ViewData["Title"] = "Детали дерева";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link type="text/css" rel="stylesheet" href="~/css/mindmap.css" />
+<link type="text/css" rel="stylesheet" href="~/css/modal.css" />
+<div id="mindmap_container" class="mindmap_container"></div>
+
+<input type="hidden" id="treeid" value=@Model.Id>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span id="modal-close" class="close">&times;</span>
+        <p id="modal-text">Some text in the Modal..</p>
+    </div>
+</div>
+<script type="text/javascript" src="~/js/functions.js"></script>
+<script type="text/javascript" src="~/js/mindmap.js"></script>
+<script>
+    function loadmindmap() {
+        ajax.get(request_url + tree_id, function (e) {
+            data = e;
+            var mind = {
+                "data": data
+            };
+            var options = {
+                container: 'mindmap_container',
+                editable: true
+            }
+            mindmap = Mindmap.show(options, mind);
+        });
+    }
+    loadmindmap();
+</script>

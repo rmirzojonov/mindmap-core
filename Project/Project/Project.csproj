@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Project.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180605151628_BD.cs" />
+    <Compile Remove="Migrations\20180605151628_BD.Designer.cs" />
+    <Compile Remove="Migrations\20180608000929_DB.cs" />
+    <Compile Remove="Migrations\20180608000929_DB.Designer.cs" />
+    <Compile Remove="Migrations\20180608003119_DB.cs" />
+    <Compile Remove="Migrations\20180608003119_DB.Designer.cs" />
+    <Compile Remove="Migrations\20180610201643_DB.cs" />
+    <Compile Remove="Migrations\20180610201643_DB.Designer.cs" />
+    <Compile Remove="Migrations\20180708182441_Tree.cs" />
+    <Compile Remove="Migrations\20180708182441_Tree.Designer.cs" />
+    <Compile Remove="Migrations\20180711105839_CommendtedTree.cs" />
+    <Compile Remove="Migrations\20180711105839_CommendtedTree.Designer.cs" />
+    <Compile Remove="Migrations\20180712123410_CommentedTree.cs" />
+    <Compile Remove="Migrations\20180712123410_CommentedTree.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDKCPP-Shield.redist" Version="1.4.20160602.50" />
+    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.6" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Chart.Controls" Version="4.7.2046" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="MvcWebGrid" Version="1.0.13" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+</Project>

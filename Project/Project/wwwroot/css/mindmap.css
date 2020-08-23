@@ -1,0 +1,74 @@
+body {
+  display: flex !important; 
+  height: 100vh !important;
+  margin: 0;
+}
+
+.mindmap_container {
+    display: flex;
+    flex: 1;
+    border: solid 1px #ccc;
+    background: #f4f4f4;
+}
+
+
+canvas {
+	position:absolute;
+	/*z-index:1;*/
+}
+
+mindmapnodes {
+	position:absolute;
+	/*z-index:2;*/
+	background-color:rgba(0,0,0,0);
+}
+
+mindmapnode {
+	position:absolute;
+	cursor:default;
+	max-width:400px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+mindmapexpander {
+	position:absolute;
+	width:11px;
+	height:11px;
+	display:block;
+	overflow:hidden;
+	line-height:12px;
+	font-size:12px;
+	text-align:center;
+	border-radius:6px;
+	border-width:1px;
+	border-style:solid;
+	cursor:pointer;
+}
+
+mindmapnode {
+	padding:5px;
+	background-color:#fff;
+	color:#333;
+	box-shadow:1px 1px 1px #666;
+	font:16px/1.125 Verdana,Arial,Helvetica,sans-serif;
+}
+mindmapnode:hover {
+	/*box-shadow:2px 2px 8px #000;*/
+	background-color:#ebebeb;
+	color:#333;
+}
+mindmapnode.selected {
+	background-color:#3D3435;
+	color:#fff;
+	/*box-shadow:2px 2px 8px #000;*/
+}
+mindmapnode.root {
+	font-size:24px;
+}
+mindmapexpander { 
+	border-color:gray;
+}
+mindmapexpander:hover {
+	border-color:#000;
+}

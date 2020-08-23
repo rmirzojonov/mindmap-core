@@ -1,0 +1,88 @@
+﻿@model Project.Models.Technology
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <h2 class="page-header">
+                @if (Html.Admin(User.Identity.Name) == "admin" || Html.Admin(User.Identity.Name) == "curator")
+                {
+                    <strong>@Model.Name</strong>@Html.ActionLink(" ред.", "TechnologyEdit", "Technologies", Model)
+                }
+                @if (Html.Admin(User.Identity.Name) != "admin" && Html.Admin(User.Identity.Name) != "curator")
+                {
+                    <strong>@Model.Name</strong>
+                }
+
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <h3><strong> Характеристики</strong></h3>
+                    <div class="text-center" id="author">
+                        <p>
+                            <table class="table" style="width: 100%; table-layout: fixed;">
+                                <tbody>
+                                    @using Project.App_Code
+                                    @Html.CreateListCharacteristics(Model.SId)
+                                </tbody>
+                            </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Тесты</th>
+                        <th> Уровень </th>
+                        <!--<th>Уровень</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @Html.CreateListTests(Model.SId)
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Материалы</th>
+                        <th>Уровень</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.CreateListData(Model.SId)
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <table class="table" style="width: 100%; table-layout: fixed; margin-left: 20px">
+                <thead>
+                    <tr>
+                        <th>Кураторы</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.CreateListCurators(Model.SId)
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
